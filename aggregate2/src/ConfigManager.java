@@ -31,6 +31,8 @@ public class ConfigManager {
     public boolean agg_kcmap;
     public String agg_kcmap_method;
     
+    public boolean agg_reflect_kc_estimate_to_items; 
+    
     public HttpServlet servletSource;
     private static String config_string = "./WEB-INF/config.xml";
     
@@ -71,6 +73,8 @@ public class ConfigManager {
                 
                 agg_kcmap = doc.getElementsByTagName("agg_kcmap").item(0).getTextContent().trim().equalsIgnoreCase("yes");
                 agg_kcmap_method = doc.getElementsByTagName("agg_kcmap_method").item(0).getTextContent().trim();
+                
+                agg_reflect_kc_estimate_to_items = doc.getElementsByTagName("agg_reflect_kc_estimate_to_items").item(0).getTextContent().trim().equalsIgnoreCase("yes");
                 
                 agg_bn_student_model_update_service_url = getTrimmedTextValue(doc, "agg_bn_student_model_update_service_url");
                 agg_bn_student_model_request_sync = Boolean.valueOf(getTrimmedTextValue(doc, "agg_bn_student_model_request_sync"));

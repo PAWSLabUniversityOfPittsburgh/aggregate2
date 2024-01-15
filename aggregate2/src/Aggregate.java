@@ -165,7 +165,7 @@ public class Aggregate {
 	 *            session id
 	 * @param updateUM
 	 *            true: build the user model, false: build a null user model if the
-	 *            user has no precomputed model stird in DB
+	 *            user has no precomputed model stored in DB
 	 * @param cm
 	 *            a ConfigManager object contains configuration variables
 	 */
@@ -398,7 +398,6 @@ public class Aggregate {
 				contentList, providers, null, null);
 		
 		// COMPUTE LEVELS FOR KCs
-		// Knowledge of each item is aggregated based on knowledge in related KCs (if userKCLevels is computed)
 		if (cm.agg_kcmap) {
 			System.out.println("Entered to KC estimation...");
 			KCModeler kcModeler = new KCModeler(usr, domain, cid, singleKCList, groupedKCList, contentList,
@@ -415,24 +414,27 @@ public class Aggregate {
 				}
 			}
 			
-			// cskamil TODO: knowledge estimates should be done based on a parameter
-			for(Map.Entry<String, Activity> contentEntry : contentSummaryMap.entrySet()) {
-				double contentAttempts = contentEntry.getValue().getLevels()[2];
-				if(contentAttempts > 0.0) { // Calculate estimates for only attempted content
-					String[] contentArr = contentList.get(contentEntry.getKey());
-					
-					if(!contentArr[6].trim().isEmpty()) {
-						String[] contentKCs = contentArr[6].split(",");
+			if(cm.agg_reflect_kc_estimate_to_items) {
+				// Knowledge of each item is aggregated based on knowledge in related KCs (if userKCLevels is computed)
+				for(Map.Entry<String, Activity> contentEntry : contentSummaryMap.entrySet()) {
+					double contentAttempts = contentEntry.getValue().getLevels()[2];
+					// cskamil TODO: How knowledge estimates should be done based on a parameter. Currently it is just a simple average
+					if(contentAttempts > 0.0) { // Calculate estimates for only attempted content
+						String[] contentArr = contentList.get(contentEntry.getKey());
 						
-						double totalKCKnowledge = 0.0;
-						
-						for(String KC: contentKCs) {
-							totalKCKnowledge += userKCLevels.get(KC)[0];
+						if(!contentArr[6].trim().isEmpty()) {
+							String[] contentKCs = contentArr[6].split(",");
+							
+							double totalKCKnowledge = 0.0;
+							
+							for(String KC: contentKCs) {
+								totalKCKnowledge += userKCLevels.get(KC)[0];
+							}
+							
+							contentEntry.getValue().getLevels()[0] = totalKCKnowledge/contentKCs.length;
+						} else {
+							System.out.println("No KC for content: " + contentEntry);
 						}
-						
-						contentEntry.getValue().getLevels()[0] = totalKCKnowledge/contentKCs.length;
-					} else {
-						System.out.println("No KC for content: " + contentEntry);
 					}
 				}
 			}
@@ -1878,6 +1880,12 @@ public class Aggregate {
 					cm.agg_line_rec_enabled = pair[1].equalsIgnoreCase("true");
 				} catch (Exception e) {
 				}
+			
+			if (pair[0].equalsIgnoreCase("reflectKcEstimateToItems"))
+				try {
+					cm.agg_reflect_kc_estimate_to_items = pair[1].equalsIgnoreCase("true");
+				} catch (Exception e) {
+				}
 
 			if (pair[0].equalsIgnoreCase("kcMap"))
 				try {
@@ -2094,8 +2102,17 @@ public class Aggregate {
 		
 		if (groupParameters != null) {
 			if (groupParameters[0] != null) {
-				String[] userParams = groupParameters[0].split(",");
-				for(String param:userParams) {
+				String groupParam = groupParameters[0];
+				if(groupParam.contains("kcResouceIds")) {
+					int startIndex = groupParam.indexOf("kcResouceIds");
+					int endIndex = groupParam.indexOf("]", startIndex);
+					String newParam = groupParam.substring(startIndex,endIndex+1).replaceAll(",",";");
+					
+					groupParam = groupParam.substring(0,startIndex) + newParam + groupParam.substring(endIndex+1);
+				}
+				
+				String[] groupParams = groupParam.split(",");
+				for(String param:groupParams) {
 					String[] keyValue = param.split(":");
 					groupVisParameterMap.put(keyValue[0], keyValue[1]);
 				}
