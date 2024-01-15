@@ -28,4 +28,5 @@
 
 	<!-- DATA INCLUDED -->
     <agg_include_null_users>no</agg_include_null_users>
+    <agg_reflect_kc_estimate_to_items>no</agg_reflect_kc_estimate_to_items>
 </configuration>
