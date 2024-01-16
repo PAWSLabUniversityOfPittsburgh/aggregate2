@@ -29,4 +29,7 @@
 	<!-- DATA INCLUDED -->
     <agg_include_null_users>no</agg_include_null_users>
     <agg_reflect_kc_estimate_to_items>no</agg_reflect_kc_estimate_to_items>
+    
+    <agg_bn_student_model_update_service_url>http://localhost/bn_general/UpdateStudentModel</agg_bn_student_model_update_service_url>
+    <agg_bn_student_model_request_sync>false</agg_bn_student_model_request_sync>
 </configuration>

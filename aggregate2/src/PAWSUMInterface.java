@@ -24,8 +24,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class PAWSUMInterface implements UMInterface {
-    //private String server = "http://pawscomp2.sis.pitt.edu";//Commented by @Jordan for debugging in localhost
-    private String server = "http://localhost:8080";
+    private String server = "http://localhost";
+//    private String server = "http://localhost:8080";
 
     private String userInfoServiceURL = server
             + "/aggregateUMServices/GetUserInfo";
@@ -35,8 +35,7 @@ public class PAWSUMInterface implements UMInterface {
             + "/aggregateUMServices/GetQuestionsActivity";
     private String examplesActivityServiceURL = server
             + "/aggregateUMServices/GetExamplesActivity";
-    //private String conceptLevelsServiceURL = server + "/cbum/ReportManager";
-    private String conceptLevelsServiceURL = "http://pawscomp2.sis.pitt.edu/cbum/ReportManager";
+    private String conceptLevelsServiceURL = server + "/cbum/ReportManager";
 
     private String contentKCURL = server
             + "/aggregateUMServices/GetContentConcepts";

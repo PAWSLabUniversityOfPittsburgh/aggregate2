@@ -53,7 +53,7 @@ public class KCModeler {
 	//private HashMap<String, double[]> previousKCLevels;
 //	private static final String bnFolder = "bn";
 	
-	private String conceptLevelsServiceURL = "http://pawscomp2.sis.pitt.edu/cbum/ReportManager";
+	private String conceptLevelsServiceURL = "http://localhost/cbum/ReportManager";
 //	private String conceptLevelsServiceURL = "http://localhost:8080/cbum/ReportManager";
 	
 	

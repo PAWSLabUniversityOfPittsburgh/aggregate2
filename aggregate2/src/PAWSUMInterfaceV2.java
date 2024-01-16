@@ -27,8 +27,8 @@ import org.w3c.dom.NodeList;
 public class PAWSUMInterfaceV2 implements UMInterface {
     //private static final int LEVELS = 9; // define how many leves will be for each content item. First level is knowledge, then progress, then ..  
 	private static final int LEVELS = 12; // modified by @Jordan as we added three metrics for measuring performance on the last k attempts 
-	private String server = "http://pawscomp2.sis.pitt.edu"; //Commented by @Jordan for debugging in localhost
-    //private String server = "http://localhost:8080";
+	private String server = "http://localhost";
+//    private String server = "http://localhost:8080"; //Use for debugging locally
 
     private String userInfoServiceURL = server + "/aggregateUMServices/GetUserInfo";
     private String classListServiceURL = server + "/aggregateUMServices/GetClassList";
@@ -40,7 +40,7 @@ public class PAWSUMInterfaceV2 implements UMInterface {
     private HashMap<String, double[]> contentSummary;
     private HashMap<String, Activity> contentSummaryV2;
 
-    static boolean verbose = true;
+    static boolean verbose = true;	
     
     // SERVICE
     public String[] getUserInfo(String usr, String key) {
@@ -428,6 +428,7 @@ public class PAWSUMInterfaceV2 implements UMInterface {
 		// A JSON object is created to pass the required parameter to the recommendation service implemented by GetRecommendations.java
 		try {
 			HttpClient client = new HttpClient();
+//			url = url.replace("http://adapt2.sis.pitt.edu", "http://localhost:8080"); // Use for debugging locally
             PostMethod method = new PostMethod(url);
             method.setRequestBody(json);
             method.addRequestHeader("Content-type", "application/json");

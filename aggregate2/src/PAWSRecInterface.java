@@ -18,8 +18,7 @@ import org.json.JSONObject;
 
 public class PAWSRecInterface implements RecInterface {
 	private boolean verbose = true;
-	//TODO later change the server to pawscomp2
-	private String server = "http://pawscomp2.sis.pitt.edu";
+	private String server = "http://localhost";
 	
     private String RecServiceURL = server + "/recommendation/GetRecommendations";
 	//private String RecServiceURL = "http://localhost:8080/recommendations/GetRecommendations";

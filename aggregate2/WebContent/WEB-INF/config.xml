@@ -34,6 +34,6 @@
     <agg_kcmap>no</agg_kcmap>
     <agg_kcmap_method>naive</agg_kcmap_method>
     
-    <agg_bn_student_model_update_service_url>http://adapt2.sis.pitt.edu/bn_general/UpdateStudentModel</agg_bn_student_model_update_service_url>
+    <agg_bn_student_model_update_service_url>http://localhost/bn_general/UpdateStudentModel</agg_bn_student_model_update_service_url>
     <agg_bn_student_model_request_sync>false</agg_bn_student_model_request_sync>
 </configuration>
