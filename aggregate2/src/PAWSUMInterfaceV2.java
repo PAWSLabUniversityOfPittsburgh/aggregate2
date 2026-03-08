@@ -27,8 +27,8 @@ import org.w3c.dom.NodeList;
 public class PAWSUMInterfaceV2 implements UMInterface {
     //private static final int LEVELS = 9; // define how many leves will be for each content item. First level is knowledge, then progress, then ..  
 	private static final int LEVELS = 12; // modified by @Jordan as we added three metrics for measuring performance on the last k attempts 
-	private String server = "http://localhost";
-//    private String server = "http://localhost:8080"; //Use for debugging locally
+//	private String server = "http://localhost";
+    private String server = "http://localhost:8080"; //Use for debugging locally
 
     private String userInfoServiceURL = server + "/aggregateUMServices/GetUserInfo";
     private String classListServiceURL = server + "/aggregateUMServices/GetClassList";

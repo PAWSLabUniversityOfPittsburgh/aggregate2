@@ -294,6 +294,7 @@ public class AggregateDB extends dbInterface {
                     String[] content = allcontent.split(";");
                     for (int i = 0; i < content.length; i++) {
                         String[] item = content[i].split(",");
+                        System.out.println(item[0]+","+item[1]);
                         int resourceIndex = resourceMap.get(item[1]);
                         if (resourceIndex>=0 && resourceIndex<n) all_content[resourceIndex].add(item[0]);
                     }

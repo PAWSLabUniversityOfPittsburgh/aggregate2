@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<!-- DATABASE -->
-	<agg_dbstring>jdbc:mysql://localhost:3306/aggregate</agg_dbstring>
-	<agg_dbuser></agg_dbuser>
-	<agg_dbpass></agg_dbpass>
+	<agg_dbstring>jdbc:mysql://localhost:3336/aggregate</agg_dbstring>
+	<agg_dbuser>root</agg_dbuser>
+	<agg_dbpass>!nfoGrass5</agg_dbpass>
     
 	<!-- UM INTERFACE -->
     <agg_uminterface_classname>PAWSUMInterfaceV2</agg_uminterface_classname>
